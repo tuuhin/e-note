@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="390" height="436.397" viewBox="0 0 390 436.397">
+  <defs>
+    <filter id="Ellipse_4" x="251" y="81" width="50" height="46" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_5" data-name="Group 5" transform="translate(2016 354)">
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="390" height="244" transform="translate(-2016 -354)" fill="#31255a"/>
+    <g id="Group_4" data-name="Group 4" transform="translate(-246 -637)">
+      <path id="Path_7" data-name="Path 7" d="M-1772,373s33,34,98,15,94-32,94-32l35-9s65-26,105,0,58,75,58,75V696s-82,46-163,9-128-32-166-21-61,30-61,30Z" transform="translate(2)" fill="#44416d"/>
+      <path id="Path_8" data-name="Path 8" d="M-1447,386s-30,12-24,38,40,20,40,20,26-4,21-31S-1447,386-1447,386Z" fill="#31255a"/>
+      <path id="Path_9" data-name="Path 9" d="M-1690,602a27.039,27.039,0,0,1,3.979-6.227c5.545-6.824,18.657-17.154,45.021-13.773,39,5,30,33,30,33s-10,24-30,24-40-5-49-17S-1690,602-1690,602Z" fill="#31255a"/>
+      <g transform="matrix(1, 0, 0, 1, -1770, 283)" filter="url(#Ellipse_4)">
+        <ellipse id="Ellipse_4-2" data-name="Ellipse 4" cx="16" cy="14" rx="16" ry="14" transform="translate(260 87)" fill="#31255a"/>
+      </g>
+      <ellipse id="Ellipse_5" data-name="Ellipse 5" cx="19.5" cy="13" rx="19.5" ry="13" transform="translate(-1453 470)" fill="#31255a"/>
+      <ellipse id="Ellipse_6" data-name="Ellipse 6" cx="15" cy="10" rx="15" ry="10" transform="translate(-1742 596)" fill="#31255a"/>
+    </g>
+    <ellipse id="Ellipse_7" data-name="Ellipse 7" cx="14" cy="9" rx="14" ry="9" transform="translate(-1904 -302)" fill="#44416d"/>
+    <ellipse id="Ellipse_8" data-name="Ellipse 8" cx="14" cy="15" rx="14" ry="15" transform="translate(-1676 -332)" fill="#44416d"/>
+  </g>
+</svg>
