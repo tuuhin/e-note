@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightBlue,
       body: Column(
         children: [
           SizedBox(height: 50),

@@ -137,7 +137,7 @@ class _CategoryEditorState extends State<CategoryEditor> {
                                           TextButton(
                                               onPressed: () {
                                                 // print(_newColor.value);
-                                                // Navigator.of(context).pop();
+                                                Navigator.of(context).pop();
                                                 // Navigator.of(context).pop();
                                               },
                                               child: Text('Cancel')),

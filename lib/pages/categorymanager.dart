@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:weather/auth/dbmanager.dart';
 import 'package:weather/home/appwidget/appwidget.dart';
@@ -65,12 +63,15 @@ class CategoryManager extends StatelessWidget {
                   AsyncSnapshot<CategoryModel?> snapshot) {
                 if (snapshot.hasData) {
                   List<CategoryCard> _card = [];
-                  snapshot.data!.currentcatergory.forEach((e) => _card.add(
+                  snapshot.data!.currentcatergory.forEach(
+                    (e) => _card.add(
                       CategoryCard(
                           noteId: e.id,
                           category: e.data()['label'],
                           colorcode: e.data()['color'],
-                          note: e.data()['note_count'])));
+                          note: e.data()['note_count']),
+                    ),
+                  );
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,6 +100,7 @@ class CategoryManager extends StatelessWidget {
                       ),
                       Expanded(
                         child: ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 5),
                             itemCount: _card.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int i) {
