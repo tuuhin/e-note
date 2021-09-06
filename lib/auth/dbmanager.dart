@@ -82,13 +82,18 @@ class DataManager {
       String title, String body, String? noteId) async {
     // print(noteId);
     if (noteId != null) {
-      await _firestore
-          .doc(uid)
-          .collection('note')
-          .doc(noteId)
-          .update({'title': title, 'body': body}).catchError((e) => print(e));
-      print('updated');
-      return 'updated';
+      try {
+        await _firestore
+            .doc(uid)
+            .collection('note')
+            .doc(noteId)
+            .update({'title': title, 'body': body}).catchError((e) => print(e));
+        print('updated');
+        return 'updated';
+      } catch (e) {
+        print(e.toString());
+        return 'failed';
+      }
     } else {
       return 'failed';
     }
@@ -145,6 +150,28 @@ class DataManager {
       }
     }
     return false;
+  }
+
+  Future deleteCategory(String? noteId, String? category) async {
+    try {
+      await _firestore.doc(uid).collection('category').doc(noteId).delete();
+      print('deleted');
+      await _firestore
+          .doc(uid)
+          .collection('note')
+          .get()
+          .then((value) => value.docs.forEach((element) {
+                if (element.data()['category'] == category) {
+                  _firestore
+                      .doc(uid)
+                      .collection('note')
+                      .doc(element.id)
+                      .delete();
+                }
+              }));
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Future<String> deleteOldNote(String? noteId, String? category) async {

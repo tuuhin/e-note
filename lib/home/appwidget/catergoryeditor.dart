@@ -100,7 +100,13 @@ class _CategoryEditorState extends State<CategoryEditor> {
                                         },
                                         child: Text('Cancel')),
                                     TextButton(
-                                        onPressed: () {}, child: Text('Delete'))
+                                        onPressed: () async {
+                                          await _manager.deleteCategory(
+                                              widget.noteId, widget.category);
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Delete'))
                                   ],
                                 );
                               });
@@ -190,11 +196,10 @@ class _CategoryEditorState extends State<CategoryEditor> {
                                       child: Text('cancell')),
                                   TextButton(
                                       onPressed: () async {
-                                        Navigator.of(context).pop();
                                         bool added =
                                             await _manager.addNewCategory(
                                                 _ctrl.text, _newColor.value);
-                                        print(added ? 'added' : 'failed');
+                                        Navigator.of(context).pop();
                                         Navigator.of(context).pop();
                                       },
                                       child: Text('Ok'))
