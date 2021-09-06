@@ -1,8 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/auth/authentication.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/home/appwidget/appwidget.dart';
+
 import 'package:weather/model/loggeruser.dart';
 import 'package:weather/model/model.dart';
 import 'package:weather/pages/page.dart';
@@ -31,23 +31,12 @@ class _SettingPageState extends State<SettingPage> {
       email = _value['email'];
     }
 
-    void addNewTag() {
-      showModalBottomSheet(
-          context: context,
-          backgroundColor: Colors.transparent,
-          isScrollControlled: true,
-          builder: (context) {
-            return Padding(
-                padding: MediaQuery.of(context).viewInsets, child: NewLabel());
-          });
-    }
-
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Column(
         children: [
           Container(
-            height: 150,
+            height: 200,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -55,23 +44,29 @@ class _SettingPageState extends State<SettingPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('Welcome',
+                  Text('  ',
                       style: TextStyle(
                           color: SettingPage._white,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1.1)),
-                  Text(name,
-                      style: TextStyle(
-                          color: SettingPage._white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.1)),
-                  Text(email,
-                      style: TextStyle(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: -0.5)),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(name,
+                          style: TextStyle(
+                              color: SettingPage._white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1.1)),
+                      SizedBox(height: 2),
+                      Text('Email: ' + email,
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: -0.5)),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -85,45 +80,51 @@ class _SettingPageState extends State<SettingPage> {
                     topRight: Radius.circular(25),
                     topLeft: Radius.circular(25)),
               ),
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    child: Text('Log Out'),
-                    onPressed: () async {
-                      await _auth.signOut();
-                    },
-                  ),
-                  TextButton(onPressed: addNewTag, child: Text('Add a tag')),
-                  SizedBox(height: 50),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Scaffold(body: Text('data'))),
-                        );
-                      },
-                      child: Text('SnackBar')),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    CategoryManager()));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Icon(Icons.category, size: 100),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 200,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20),
+                          Text('Management',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          SizedBox(height: 20),
+                          Container(
+                            child: Center(
+                              child: Wrap(
+                                spacing: 20,
+                                runSpacing: 20,
+                                children: [
+                                  CategoryViewer(),
+                                  TaskViewer(),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    Divider(height: 10),
+                    Column(
+                      children: [
+                        TextButton.icon(
+                          icon: Icon(Icons.logout),
+                          label: Text('Log Out'),
+                          onPressed: () async {
+                            await _auth.signOut();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

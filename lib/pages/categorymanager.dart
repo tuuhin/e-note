@@ -73,16 +73,38 @@ class CategoryManager extends StatelessWidget {
                           note: e.data()['note_count'])));
 
                   return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 10),
+                            Text(
+                              '    Your Categories',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                            SizedBox(height: 10),
+                            Divider(height: 10),
+                            Text(
+                                'You can delete or update your categories here \nTo add a new one tap on the + Button '),
+                            Divider(height: 10),
+                          ],
+                        ),
+                      ),
                       Expanded(
                         child: ListView.builder(
                             itemCount: _card.length,
                             scrollDirection: Axis.vertical,
                             itemBuilder: (BuildContext context, int i) {
                               return Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 20),
                                 child: GestureDetector(
                                   child: _card[i],
                                   onDoubleTap: () {
