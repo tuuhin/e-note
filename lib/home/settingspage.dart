@@ -22,6 +22,8 @@ class _SettingPageState extends State<SettingPage> {
 
   String email = '';
 
+  bool _modeDark = false;
+
   @override
   Widget build(BuildContext context) {
     var _value = Provider.of<LoggedUser?>(context)!.userdata;
@@ -34,43 +36,35 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          SizedBox(height: 80),
           Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
+            // color: Colors.purple,
+            // width: 300,
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('  ',
+                  Text(name,
                       style: TextStyle(
                           color: SettingPage._white,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1.1)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(name,
-                          style: TextStyle(
-                              color: SettingPage._white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1.1)),
-                      SizedBox(height: 2),
-                      Text('Email: ' + email,
-                          style: TextStyle(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: -0.5)),
-                    ],
-                  ),
+                  SizedBox(height: 2),
+                  Text('Email: ' + email,
+                      style: TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: -0.5)),
                 ],
               ),
             ),
           ),
+          SizedBox(height: 10),
           Expanded(
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -93,7 +87,7 @@ class _SettingPageState extends State<SettingPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 20),
-                          Text('Management',
+                          Text('     Management',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           SizedBox(height: 20),
                           Container(
@@ -113,13 +107,36 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                     Divider(height: 10),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text('Settings',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
                         TextButton.icon(
                           icon: Icon(Icons.logout),
                           label: Text('Log Out'),
                           onPressed: () async {
                             await _auth.signOut();
                           },
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton.icon(
+                              icon: Icon(Icons.dark_mode_outlined),
+                              label: Text('Dark Mode'),
+                              onPressed: () {},
+                            ),
+                            Switch.adaptive(
+                              activeColor: Colors.blue[900],
+                              value: _modeDark,
+                              onChanged: (bool? a) {
+                                setState(() {
+                                  _modeDark = !_modeDark;
+                                });
+                                print(Theme.of(context).brightness);
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),
