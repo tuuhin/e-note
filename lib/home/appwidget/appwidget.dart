@@ -6,4 +6,4 @@ export 'addnewlabel.dart';
 export 'labelview.dart';
 export 'catergoryeditor.dart';
 export 'categoryviewer.dart';
-export 'taskviewer.dart';
+export 'profileviewer.dart';

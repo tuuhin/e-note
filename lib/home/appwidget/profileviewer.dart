@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather/pages/page.dart';
 
-class TaskViewer extends StatelessWidget {
-  const TaskViewer({Key? key}) : super(key: key);
+class ProfileViewer extends StatelessWidget {
+  const ProfileViewer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,12 @@ class TaskViewer extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey[300], borderRadius: BorderRadius.circular(20)),
       child: GestureDetector(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return ProfilePage();
+          }));
+        },
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -18,12 +25,12 @@ class TaskViewer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                'Tasks',
+                'Profile',
                 style: TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.black54),
               ),
               Icon(
-                Icons.task,
+                Icons.account_circle_outlined,
                 size: 50,
                 color: Theme.of(context).primaryColor,
               ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather/auth/authentication.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/home/appwidget/appwidget.dart';
-
 import 'package:weather/model/loggeruser.dart';
 import 'package:weather/model/model.dart';
 import 'package:weather/pages/page.dart';
@@ -22,8 +21,6 @@ class _SettingPageState extends State<SettingPage> {
 
   String email = '';
 
-  bool _modeDark = false;
-
   @override
   Widget build(BuildContext context) {
     var _value = Provider.of<LoggedUser?>(context)!.userdata;
@@ -39,32 +36,54 @@ class _SettingPageState extends State<SettingPage> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           SizedBox(height: 80),
-          Container(
-            // color: Colors.purple,
-            // width: 300,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(name,
-                      style: TextStyle(
-                          color: SettingPage._white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.1)),
-                  SizedBox(height: 2),
-                  Text('Email: ' + email,
-                      style: TextStyle(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: -0.5)),
-                ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(80),
+                  child: Container(
+                    // color: Colors.red,
+                    child: Center(
+                        child: Icon(
+                      Icons.account_circle,
+                      size: 70,
+                      color: Colors.white,
+                    )),
+                  ),
+                ),
               ),
-            ),
+              Container(
+                // color: Colors.purple,
+                // width: 300,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: SettingPage._white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1.1)),
+                      SizedBox(height: 2),
+                      Text('Email: ' + email,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: -0.5)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 10),
+          // SizedBox(height: 10),
           Expanded(
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -82,12 +101,12 @@ class _SettingPageState extends State<SettingPage> {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 200,
+                      height: 250,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 20),
-                          Text('     Management',
+                          Text('    Management',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           SizedBox(height: 20),
                           Container(
@@ -97,7 +116,7 @@ class _SettingPageState extends State<SettingPage> {
                                 runSpacing: 20,
                                 children: [
                                   CategoryViewer(),
-                                  TaskViewer(),
+                                  ProfileViewer(),
                                 ],
                               ),
                             ),
@@ -109,8 +128,10 @@ class _SettingPageState extends State<SettingPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10),
                         Text('Settings',
                             style: TextStyle(fontWeight: FontWeight.bold)),
+                        SizedBox(height: 10),
                         TextButton.icon(
                           icon: Icon(Icons.logout),
                           label: Text('Log Out'),
@@ -118,26 +139,24 @@ class _SettingPageState extends State<SettingPage> {
                             await _auth.signOut();
                           },
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton.icon(
-                              icon: Icon(Icons.dark_mode_outlined),
-                              label: Text('Dark Mode'),
-                              onPressed: () {},
-                            ),
-                            Switch.adaptive(
-                              activeColor: Colors.blue[900],
-                              value: _modeDark,
-                              onChanged: (bool? a) {
-                                setState(() {
-                                  _modeDark = !_modeDark;
-                                });
-                                print(Theme.of(context).brightness);
-                              },
-                            ),
-                          ],
-                        ),
+                        TextButton.icon(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext ontext) {
+                                return AboutPage();
+                              }));
+                            },
+                            label: Text('About'),
+                            icon: Icon(Icons.question_answer)),
+                        TextButton.icon(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext ontext) {
+                                return FeedBackPage();
+                              }));
+                            },
+                            label: Text('Feedback'),
+                            icon: Icon(Icons.message)),
                       ],
                     ),
                   ],
