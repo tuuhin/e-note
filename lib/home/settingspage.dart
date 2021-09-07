@@ -31,7 +31,7 @@ class _SettingPageState extends State<SettingPage> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightBlue,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

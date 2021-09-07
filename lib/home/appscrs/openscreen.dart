@@ -46,10 +46,13 @@ class _OpenScreenState extends State<OpenScreen>
           value: _manager.loggedUser,
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: TabBarView(controller: _tabs, children: [
-              HomeScreen(),
-              SettingPage(),
-            ]),
+            body: TabBarView(
+                // physics: NeverScrollableScrollPhysics(),
+                controller: _tabs,
+                children: [
+                  HomeScreen(),
+                  SettingPage(),
+                ]),
             bottomNavigationBar: BottomAppBar(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
