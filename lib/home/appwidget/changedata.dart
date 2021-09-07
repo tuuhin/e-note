@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather/auth/dbmanager.dart';
+import 'package:weather/model/model.dart';
 
 class ChangeData extends StatelessWidget {
   final IconData headIcon;
@@ -56,12 +59,20 @@ class ChangeData extends StatelessWidget {
 }
 
 class UpdateSheet extends StatelessWidget {
-  UpdateSheet({Key? key, required this.title, this.update}) : super(key: key);
+  UpdateSheet({
+    Key? key,
+    required this.title,
+    this.mode,
+  }) : super(key: key);
   final String title;
-  final void Function()? update;
+  final String? mode;
+
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var uid = Provider.of<CurrentUser?>(context)!.uid;
+    DataManager _manager = DataManager(uid);
     return Container(
         height: 150,
         decoration: BoxDecoration(
@@ -82,7 +93,9 @@ class UpdateSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              TextField(),
+              TextField(
+                controller: _controller,
+              ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -97,7 +110,12 @@ class UpdateSheet extends StatelessWidget {
                             fontWeight: FontWeight.w500, fontSize: 15),
                       )),
                   TextButton(
-                    onPressed: update,
+                    onPressed: () async {
+                      if (mode == 'name') {
+                        await _manager.updateUserName(_controller.text);
+                        Navigator.of(context).pop();
+                      }
+                    },
                     child: Text(
                       'Update',
                       style:

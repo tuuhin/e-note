@@ -20,6 +20,7 @@ class DataManager {
     try {
       await _firestore.doc(uid).set({
         'name': name,
+        'about': ' ',
         'email': email,
       });
       for (var i in newUser) {
@@ -28,6 +29,24 @@ class DataManager {
       print('done');
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future updateUserName(String name) async {
+    try {
+      await _firestore.doc(uid).update({
+        'name': name,
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future getCurrentUserData() async {
+    try {
+      return await _firestore.doc(uid).get();
+    } catch (e) {
+      print(e.toString());
     }
   }
 
