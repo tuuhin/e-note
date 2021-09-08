@@ -20,7 +20,7 @@ class _NotePageState extends State<NotePage> {
 
   TextEditingController _body = TextEditingController();
 
-  String _currentCategory = 'uncategorised';
+  String _currentCategory = '';
 
   bool isSelected = false;
 
@@ -178,7 +178,9 @@ class _NotePageState extends State<NotePage> {
           if (snapshot.hasData) {
             List<String> _wid = snapshot.data;
             print(snapshot.data);
-            // String _currentCategory = _wid[0];
+            if (_currentCategory == '') {
+              _currentCategory = _wid[0];
+            }
             return Scaffold(
               backgroundColor: Colors.blue,
               appBar: PreferredSize(

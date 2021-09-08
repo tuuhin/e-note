@@ -284,4 +284,14 @@ class DataManager {
             }));
     return data;
   }
+
+  Future addFeedBack(String name, String email, String feedback) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('feedback')
+          .add({'name': name, 'email': email, 'feedback': feedback});
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

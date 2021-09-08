@@ -47,7 +47,7 @@ class _OpenScreenState extends State<OpenScreen>
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: TabBarView(
-                // physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 controller: _tabs,
                 children: [
                   HomeScreen(),
