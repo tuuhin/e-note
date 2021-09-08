@@ -33,7 +33,7 @@ class _SettingPageState extends State<SettingPage> {
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       body: Container(
-        height: MediaQuery.of(context).size.height,
+        // height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -103,7 +103,7 @@ class _SettingPageState extends State<SettingPage> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 250,
+                        // height: 250,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -126,7 +126,7 @@ class _SettingPageState extends State<SettingPage> {
                           ],
                         ),
                       ),
-                      Divider(height: 10),
+                      Divider(height: 30),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -143,6 +143,7 @@ class _SettingPageState extends State<SettingPage> {
                               },
                               label: Text('About'),
                               icon: Icon(Icons.question_answer)),
+                          Divider(),
                           TextButton.icon(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(
@@ -152,6 +153,7 @@ class _SettingPageState extends State<SettingPage> {
                               },
                               label: Text('Feedback'),
                               icon: Icon(Icons.message)),
+                          Divider(),
                           TextButton.icon(
                             icon: Icon(Icons.logout, color: Colors.redAccent),
                             label: Text('Log Out',
@@ -160,6 +162,7 @@ class _SettingPageState extends State<SettingPage> {
                               await _auth.signOut();
                             },
                           ),
+                          Divider()
                         ],
                       ),
                     ],

@@ -130,7 +130,11 @@ class HomeScreen extends StatelessWidget {
                             height: 100,
                             child: Column(
                               children: [
-                                Icon(Icons.note_add, size: 50),
+                                Icon(
+                                  Icons.note_add,
+                                  size: 50,
+                                  color: Colors.blue,
+                                ),
                                 Text('No notes created'),
                               ],
                             ),
