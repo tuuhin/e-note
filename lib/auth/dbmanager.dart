@@ -42,12 +42,18 @@ class DataManager {
     }
   }
 
-  Future getCurrentUserData() async {
+  Future updateAbout(String about) async {
     try {
-      return await _firestore.doc(uid).get();
+      await _firestore.doc(uid).update({
+        'about': about,
+      });
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Stream getCurrentUserData() {
+    return _firestore.doc(uid).snapshots();
   }
 
   Future addNewLable(String head, int foreground, int background) async {

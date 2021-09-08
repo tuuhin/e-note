@@ -40,7 +40,7 @@ class _SettingPageState extends State<SettingPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 5, 10),
+                padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(80),
                   child: Container(
@@ -56,7 +56,7 @@ class _SettingPageState extends State<SettingPage> {
               ),
               Container(
                 // color: Colors.purple,
-                // width: 300,
+                width: 280,
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                   child: Column(
@@ -72,7 +72,7 @@ class _SettingPageState extends State<SettingPage> {
                               letterSpacing: 1.1)),
                       SizedBox(height: 2),
                       Text('Email: ' + email,
-                          overflow: TextOverflow.ellipsis,
+                          // overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.white70,
                               fontWeight: FontWeight.w400,

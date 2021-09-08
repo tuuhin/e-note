@@ -20,7 +20,7 @@ class _NotePageState extends State<NotePage> {
 
   TextEditingController _body = TextEditingController();
 
-  String _currentCategory = 'Uncategorized';
+  String _currentCategory = 'uncategorised';
 
   bool isSelected = false;
 
@@ -109,7 +109,6 @@ class _NotePageState extends State<NotePage> {
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
         child: ElevatedButton(
           onPressed: () {
-            print('hellow');
             showDialog(
                 context: context,
                 builder: (context) {
@@ -178,6 +177,7 @@ class _NotePageState extends State<NotePage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<String> _wid = snapshot.data;
+            print(snapshot.data);
             // String _currentCategory = _wid[0];
             return Scaffold(
               backgroundColor: Colors.blue,

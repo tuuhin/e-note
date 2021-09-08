@@ -28,11 +28,10 @@ class MyApp extends StatelessWidget {
       initialData: CurrentUser(uid: null),
       child: MaterialApp(
         // debugShowCheckedModeBanner: false,
+
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData(primarySwatch: Colors.blue),
         routes: {
           '/': (context) => Partition(),
           '/note': (context) => NotePage(),
