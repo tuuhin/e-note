@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:weather/auth/dbmanager.dart';
 import 'package:weather/model/user.dart';
@@ -54,8 +56,7 @@ class Authentication {
       }
       return e.code.toString();
     } catch (e) {
-      print(e.toString());
-      return null;
+      return e.toString();
     }
   }
 
