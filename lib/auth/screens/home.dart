@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Weatherly',
+                    'E Note\'s',
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.white70,
@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    'Get cuurent weather data of any place from any \nparts of the world.',
+                    'Create note\'s with a different manner\nAnd make those available with just a login.',
                     style: TextStyle(color: Colors.white70, fontSize: 14),
                   ),
                   SizedBox(
