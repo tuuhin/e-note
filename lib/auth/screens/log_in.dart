@@ -22,21 +22,34 @@ class _LogInState extends State<LogIn> {
   final _auth = Authentication();
   final _formkey = GlobalKey<FormState>();
   void createDialog(BuildContext context, String str) {
-    String _heading = '';
+    String _heading = 'Login Failed';
     String _content = '';
     if (str == 'user-not-found') {
-      _heading = 'Oppo !';
-      _content = str;
+      _content =
+          'We are not able to find your account. Account with this credintials don\'t exists.Login with a valid account';
     } else if (str == 'wrong-password') {
-      _heading = 'Oppo !';
-      _content = str + '\nplease provide the correct pword';
+      _content =
+          'The credentials don\'t match please provide the correct password to login';
+    } else if (str == 'invalid-email') {
+      _content =
+          'The provided email is not vaild .Please provide a proper email';
+    } else if (str == 'network-request-failed') {
+      _content =
+          'Is there a issue with the internet connection.Plz try a bit afterwards.Your connection don\'t seems well';
     } else {
-      _heading = 'Sry';
-      _content = 'something went wrong';
+      _content =
+          'There is some problem that we are too unaware of Plz try again latter';
     }
     AlertDialog _alert = AlertDialog(
       title: Text(_heading),
       content: Text(_content),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Ok I understand'))
+      ],
     );
 
     showDialog(
@@ -143,11 +156,7 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
-                          TextButton(
-                              onPressed: () {},
-                              child: Text('Forgot Password?')),
-                          SizedBox(height: 5),
+                          SizedBox(height: 40),
                           ElevatedButton(
                             child: Text('Log in'),
                             style: ElevatedButton.styleFrom(
