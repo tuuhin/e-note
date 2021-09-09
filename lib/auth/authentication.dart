@@ -26,7 +26,7 @@ class Authentication {
       User? firebaseUser = userCredential.user;
       await DataManager(firebaseUser!.uid.toString())
           .createUserData(name, email);
-      return firebaseUser;
+      return 'new-user';
     } on FirebaseAuthException catch (e) {
       // print(e.toString());
       if (e.code == 'weak-password') {
@@ -37,16 +37,15 @@ class Authentication {
       return e.code.toString();
     } catch (e) {
       print(e.toString());
-      return null;
+      return e.toString();
     }
   }
 
   Future signWithEmail(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      User? firebaseUser = userCredential.user;
-      return firebaseUser;
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      // User? firebaseUser = userCredential.user;
+      return 'new-user';
     } on FirebaseAuthException catch (e) {
       // print(e.toString());
       if (e.code == 'user-not-found') {

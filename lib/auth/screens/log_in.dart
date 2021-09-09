@@ -24,7 +24,10 @@ class _LogInState extends State<LogIn> {
   void createDialog(BuildContext context, String str) {
     String _heading = 'Login Failed';
     String _content = '';
-    if (str == 'user-not-found') {
+    if (str == 'new-user') {
+      _heading = 'Welcome ';
+      _content = 'Welcome back Hope you have a good day!';
+    } else if (str == 'user-not-found') {
       _content =
           'We are not able to find your account. Account with this credintials don\'t exists.Login with a valid account';
     } else if (str == 'wrong-password') {
@@ -170,16 +173,14 @@ class _LogInState extends State<LogIn> {
                                 setState(() {
                                   loading = true;
                                 });
-                                var current =
+                                String current =
                                     await _auth.signWithEmail(_email, _pword);
-                                if (current.runtimeType.toString() != 'User') {
-                                  print(current);
+                                if (current != 'new-user') {
                                   setState(() {
                                     loading = false;
                                   });
                                   createDialog(context, current);
                                 }
-                                // print('done');
                               } else {
                                 print('error');
                               }

@@ -25,27 +25,44 @@ class _SignUpState extends State<SignUp> {
   final _formkey = GlobalKey<FormState>();
 
   void createDialog(BuildContext context, String str) {
-    String _heading = '';
+    String _heading = 'Sign-In error';
     String _content = '';
-    if (str == 'email-already-in-use') {
-      _heading = 'Oppo !';
-      _content = str;
+    if (str == 'new-user') {
+      _heading = 'Welcome';
+      _content =
+          'Sir/Madam we welcome you to E-Note an note app for maintaing your notes . We promise to deliver your valueable notes with just a simple login in any phones';
+    } else if (str == 'email-already-in-use') {
+      _content =
+          'We are extremly sorry you can\'t use this email. This is currently in use to another user .If it\'s not you plz provide a new email';
+    } else if (str == 'invalid-email') {
+      _content =
+          'The provided email is not vaild .Please provide a proper email';
     } else if (str == 'weak-password') {
-      _heading = 'Oppo !';
-      _content = str;
+      _content =
+          'It\'s seems like you have enter a weak password .A strong password keeps you safe .Plz provide a strng password';
+    } else if (str == 'network-request-failed') {
+      _content =
+          'Is there a issue with the internet connection.Plz try a bit afterwards.Your connection don\'t seems well';
     } else {
-      _heading = 'Sry';
-      _content = 'something went wrong';
+      print(str);
+      _content =
+          'There is some problem that we are too unaware of Plz try again latter';
     }
-    AlertDialog _alert = AlertDialog(
-      title: Text(_heading),
-      content: Text(_content),
-    );
 
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return _alert;
+          return AlertDialog(
+            title: Text(_heading),
+            content: Text(_content),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Ok I understood'))
+            ],
+          );
         });
   }
 
@@ -107,7 +124,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          // SizedBox(height: 5),
                           TextFormField(
                             validator: (val) {
                               if (val != null) {
@@ -169,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          SizedBox(height: 10),
                           ElevatedButton(
                             child: Text('Sign In'),
                             style: ElevatedButton.styleFrom(
@@ -183,17 +200,15 @@ class _SignUpState extends State<SignUp> {
                                 setState(() {
                                   loading = true;
                                 });
-                                var current = await _auth.registerWithEmail(
+                                String current = await _auth.registerWithEmail(
                                     _email, _pword, _name);
-                                print(current);
-                                if (current.runtimeType.toString() != 'User') {
-                                  print(current);
+                                if (current != 'new-user') {
+                                  // print(current);
                                   setState(() {
                                     loading = false;
                                   });
                                   createDialog(context, current);
                                 }
-                                print('Done');
                               } else {
                                 print('error');
                               }
