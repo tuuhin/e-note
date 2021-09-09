@@ -235,6 +235,7 @@ class _NotePageState extends State<NotePage> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
                       controller: _title,
+                      autofocus: true,
                       style: TextStyle(fontSize: 20),
                       cursorWidth: 3,
                       cursorHeight: 25,

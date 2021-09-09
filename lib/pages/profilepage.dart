@@ -4,8 +4,25 @@ import 'package:weather/home/appwidget/appwidget.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/model/model.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  late TextEditingController _name;
+  late TextEditingController _about;
+  late TextEditingController _email;
+
+  @override
+  void initState() {
+    super.initState();
+    _name = TextEditingController();
+    _about = TextEditingController();
+    _email = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +32,9 @@ class ProfilePage extends StatelessWidget {
         stream: _manager.getCurrentUserData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
+            _name.text = snapshot.data.data()['name'];
+            _about.text = snapshot.data.data()['about'];
+            _email.text = snapshot.data.data()['email'];
             return Scaffold(
               backgroundColor: Theme.of(context).primaryColor,
               appBar: AppBar(
@@ -34,7 +54,9 @@ class ProfilePage extends StatelessWidget {
                             horizontal: 30, vertical: 10),
                         child: Column(
                           children: [
-                            GestureDetector(
+                            TextField(
+                              readOnly: true,
+                              controller: _name,
                               onTap: () {
                                 showModalBottomSheet(
                                     backgroundColor: Colors.transparent,
@@ -53,14 +75,18 @@ class ProfilePage extends StatelessWidget {
                                       );
                                     });
                               },
-                              child: ChangeData(
-                                  headIcon: Icons.person,
-                                  value: snapshot.data.data()['name'],
-                                  editable: true,
-                                  head: 'Name'),
+                              decoration: InputDecoration(
+                                  suffixIcon: Icon(Icons.edit),
+                                  icon: Icon(Icons.person),
+                                  labelText: 'Name',
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide.none)),
                             ),
                             Divider(height: 30),
-                            GestureDetector(
+                            TextField(
+                              readOnly: true,
+                              controller: _about,
+                              maxLines: 3,
                               onTap: () {
                                 showModalBottomSheet(
                                     backgroundColor: Colors.transparent,
@@ -79,18 +105,24 @@ class ProfilePage extends StatelessWidget {
                                       );
                                     });
                               },
-                              child: ChangeData(
-                                  headIcon: Icons.info,
-                                  value: snapshot.data.data()['about'],
-                                  editable: true,
-                                  head: 'About'),
+                              decoration: InputDecoration(
+                                  suffixIcon: Icon(Icons.edit),
+                                  icon: Icon(Icons.info),
+                                  labelText: 'About',
+                                  focusedBorder: null,
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide.none)),
                             ),
                             Divider(height: 30),
-                            ChangeData(
-                                headIcon: Icons.email,
-                                value: snapshot.data.data()['email'],
-                                editable: false,
-                                head: 'Email')
+                            TextField(
+                              readOnly: true,
+                              controller: _email,
+                              decoration: InputDecoration(
+                                  icon: Icon(Icons.email),
+                                  labelText: 'Email',
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide.none)),
+                            )
                           ],
                         ),
                       )

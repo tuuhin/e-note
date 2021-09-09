@@ -20,7 +20,7 @@ class _SettingPageState extends State<SettingPage> {
   String name = '';
 
   String email = '';
-
+  List<Widget> _settings = [];
   @override
   Widget build(BuildContext context) {
     var _value = Provider.of<LoggedUser?>(context)!.userdata;
@@ -29,6 +29,39 @@ class _SettingPageState extends State<SettingPage> {
       name = _value['name'];
       email = _value['email'];
     }
+    _settings = [
+      SizedBox(height: 10),
+      Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
+      SizedBox(height: 10),
+      TextButton.icon(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext ontext) {
+              return AboutPage();
+            }));
+          },
+          label: Text('About'),
+          icon: Icon(Icons.question_answer)),
+      Divider(height: 1),
+      TextButton.icon(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext ontext) {
+              return FeedBackPage();
+            }));
+          },
+          label: Text('Feedback'),
+          icon: Icon(Icons.message)),
+      Divider(height: 1),
+      TextButton.icon(
+        icon: Icon(Icons.logout, color: Colors.redAccent),
+        label: Text('Log Out', style: TextStyle(color: Colors.redAccent)),
+        onPressed: () async {
+          await _auth.signOut();
+        },
+      ),
+      Divider(height: 1),
+    ];
 
     return Scaffold(
       backgroundColor: Colors.lightBlue,
@@ -127,44 +160,13 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                       Divider(height: 30),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10),
-                          Text('Settings',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          SizedBox(height: 10),
-                          TextButton.icon(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext ontext) {
-                                  return AboutPage();
-                                }));
-                              },
-                              label: Text('About'),
-                              icon: Icon(Icons.question_answer)),
-                          Divider(),
-                          TextButton.icon(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (BuildContext ontext) {
-                                  return FeedBackPage();
-                                }));
-                              },
-                              label: Text('Feedback'),
-                              icon: Icon(Icons.message)),
-                          Divider(),
-                          TextButton.icon(
-                            icon: Icon(Icons.logout, color: Colors.redAccent),
-                            label: Text('Log Out',
-                                style: TextStyle(color: Colors.redAccent)),
-                            onPressed: () async {
-                              await _auth.signOut();
-                            },
-                          ),
-                          Divider()
-                        ],
-                      ),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: _settings.length,
+                            itemBuilder: (BuildContext context, int i) {
+                              return _settings[i];
+                            }),
+                      )
                     ],
                   ),
                 ),

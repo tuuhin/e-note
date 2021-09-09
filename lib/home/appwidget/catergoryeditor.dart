@@ -18,9 +18,18 @@ class CategoryEditor extends StatefulWidget {
 }
 
 class _CategoryEditorState extends State<CategoryEditor> {
-  TextEditingController _ctrl = TextEditingController();
+  late TextEditingController _ctrl;
 
   Color _newColor = Colors.blue;
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.category);
+    if (widget.category != null) {
+      _ctrl.selection =
+          TextSelection(baseOffset: 0, extentOffset: widget.category!.length);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class _CategoryEditorState extends State<CategoryEditor> {
     DataManager _manager = DataManager(uid);
 
     return Container(
-      height: 200,
+      height: 220,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -73,7 +82,10 @@ class _CategoryEditorState extends State<CategoryEditor> {
                     style: TextStyle(color: _newColor))),
             TextField(
               controller: _ctrl,
+              autofocus: true,
+              maxLength: 15,
               decoration: InputDecoration(
+                  labelText: 'Category Name',
                   hintText: (widget.category != null)
                       ? 'Change the name of the category'
                       : 'Name of the category'),

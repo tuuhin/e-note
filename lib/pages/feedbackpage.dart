@@ -122,6 +122,7 @@ class _FeedBackPageState extends State<FeedBackPage> {
                     Divider(),
                     TextField(
                       controller: _email,
+                      readOnly: true,
                       decoration: InputDecoration(
                           icon: Icon(Icons.email),
                           hintText: 'Email',
@@ -133,6 +134,7 @@ class _FeedBackPageState extends State<FeedBackPage> {
                     Expanded(
                         child: TextField(
                       controller: _feedback,
+                      autofocus: true,
                       maxLines: null,
                       expands: true,
                       keyboardType: TextInputType.multiline,

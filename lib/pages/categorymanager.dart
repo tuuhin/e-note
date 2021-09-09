@@ -23,6 +23,7 @@ class CategoryManager extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
                     return Padding(
                       padding: MediaQuery.of(context).viewInsets,
