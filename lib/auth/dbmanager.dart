@@ -22,6 +22,7 @@ class DataManager {
         'name': name,
         'about': ' ',
         'email': email,
+        'date': FieldValue.serverTimestamp(),
       });
       for (var i in newUser) {
         await _firestore.doc(uid).collection('category').add(i);
@@ -164,10 +165,12 @@ class DataManager {
     bool _exists = _currentcategories.contains(category);
     if (!_exists) {
       try {
-        await _firestore
-            .doc(uid)
-            .collection('category')
-            .add({'label': category, 'note_count': 0, 'color': colorcode});
+        await _firestore.doc(uid).collection('category').add({
+          'label': category,
+          'note_count': 0,
+          'color': colorcode,
+          'date': FieldValue.serverTimestamp()
+        });
         return true;
       } catch (e) {
         print(e.toString());

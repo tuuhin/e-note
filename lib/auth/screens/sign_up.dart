@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/auth/authentication.dart';
-import 'package:weather/widget/customloader.dart';
+import 'package:weather/home/appwidget/customloader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUp extends StatefulWidget {

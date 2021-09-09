@@ -4,10 +4,10 @@ import 'package:weather/model/model.dart';
 import 'package:provider/provider.dart';
 
 class NotePage extends StatefulWidget {
-  String? title;
-  String? body;
-  String? category;
-  String? noteId;
+  final String? title;
+  final String? body;
+  final String? category;
+  final String? noteId;
   NotePage({Key? key, this.title, this.body, this.category, this.noteId})
       : super(key: key);
 
@@ -21,8 +21,6 @@ class _NotePageState extends State<NotePage> {
   TextEditingController _body = TextEditingController();
 
   String _currentCategory = '';
-
-  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,22 +46,36 @@ class _NotePageState extends State<NotePage> {
                 builder: (context) {
                   return AlertDialog(
                     title: Text('Update Note'),
-                    content: Text(
-                        'Are you sure u want to update note titled: \n${widget.title}'),
+                    content: RichText(
+                        text: TextSpan(
+                            text: 'Updating the current note titled:\n',
+                            style: TextStyle(color: Colors.black),
+                            children: [
+                          TextSpan(
+                              text: '${widget.title}',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600))
+                        ])),
                     actions: [
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel')),
+                          child: Text('Cancel',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600))),
                       TextButton(
                           onPressed: () async {
-                            String updated = await _manager.updateOldNote(
+                            await _manager.updateOldNote(
                                 _title.text, _body.text, widget.noteId);
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                           },
-                          child: Text('Ok')),
+                          child: Text('Update')),
                     ],
                   );
                 });
@@ -81,22 +93,53 @@ class _NotePageState extends State<NotePage> {
                 builder: (context) {
                   return AlertDialog(
                     title: Text('Delete Note'),
-                    content: Text(
-                        'Are you sure u want to delete note titled: \n${widget.title} \n the note will be permanently deleted'),
+                    content: RichText(
+                        text: TextSpan(
+                            text: 'Deleting the current note titled:\n',
+                            style: TextStyle(color: Colors.black),
+                            children: [
+                          TextSpan(
+                              text: '${widget.title}\n',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500)),
+                          TextSpan(
+                              text: 'warning:',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600)),
+                          TextSpan(
+                            text:
+                                'This note will be permanently deleted and could not be recycled latter',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ])),
                     actions: [
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel')),
+                          child: Text('Cancel',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600))),
                       TextButton(
                           onPressed: () async {
-                            String _deleted = await _manager.deleteOldNote(
+                            await _manager.deleteOldNote(
                                 widget.noteId, widget.category);
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                           },
-                          child: Text('Ok')),
+                          child: Text('Delete',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600))),
                     ],
                   );
                 });
@@ -115,16 +158,35 @@ class _NotePageState extends State<NotePage> {
                   return AlertDialog(
                     title: Text('Add a new  Note'),
                     content: (_title.text.length > 0 && _body.text.length > 0)
-                        ? Text('Adding new note titled: \n ${_title.text}')
+                        ? RichText(
+                            text: TextSpan(
+                                text: 'Adding new note titled:\n',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                TextSpan(
+                                    text: '${_title.text}',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600))
+                              ]))
                         : Text(
-                            'Either title or body don\'t contain any character\'s \n Try adding some characters'),
+                            'Either title or body don\'t contain any character\'s \nTry adding some characters'),
                     actions: (_title.text.length > 0 && _body.text.length > 0)
                         ? [
                             TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Cancel')),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                'Cancel',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
                             TextButton(
                                 onPressed: () async {
                                   await _manager.addNewNote(_title.text,
@@ -134,7 +196,7 @@ class _NotePageState extends State<NotePage> {
                                 }
                                 // Navigator.of(context).pop();
                                 ,
-                                child: Text('Ok'))
+                                child: Text('Add'))
                           ]
                         : [
                             TextButton(
@@ -177,7 +239,7 @@ class _NotePageState extends State<NotePage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             List<String> _wid = snapshot.data;
-            print(snapshot.data);
+            // print(snapshot.data);
             if (_currentCategory == '') {
               _currentCategory = _wid[0];
             }
@@ -195,14 +257,20 @@ class _NotePageState extends State<NotePage> {
                           style: TextStyle(fontSize: 25),
                         )
                       : DropdownButton(
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                          dropdownColor: Colors.black12,
+                          isExpanded: true,
+                          hint: Text('categoryy'),
+                          style: TextStyle(
+                            // color: Colors.white,
+                            fontSize: 20,
+                          ),
                           underline: Container(),
                           icon: Icon(
                             Icons.expand_more,
-                            color: Colors.white,
+                            // color: Colors.white,
                             size: 25,
                           ),
-                          // iconEnabledColor: Colors.white,
+                          iconEnabledColor: Colors.white,
                           onChanged: (String? newValue) {
                             setState(() {
                               _currentCategory = newValue!;
@@ -211,11 +279,13 @@ class _NotePageState extends State<NotePage> {
                           value: _currentCategory,
                           items: _wid
                               .map<DropdownMenuItem<String>>(
-                                  (String value) => DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(
-                                          value,
-                                          overflow: TextOverflow.ellipsis,
+                                  (String v) => DropdownMenuItem<String>(
+                                        value: v,
+                                        child: Center(
+                                          child: Text(
+                                            v,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
                                       ))
                               .toList(),
@@ -235,7 +305,7 @@ class _NotePageState extends State<NotePage> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: TextField(
                       controller: _title,
-                      autofocus: true,
+                      autofocus: (widget.category == null) ? true : false,
                       style: TextStyle(fontSize: 20),
                       cursorWidth: 3,
                       cursorHeight: 25,
@@ -254,6 +324,7 @@ class _NotePageState extends State<NotePage> {
                       child: TextField(
                         controller: _body,
                         cursorWidth: 3,
+                        autofocus: (widget.category != null) ? true : false,
                         cursorHeight: 25,
                         cursorRadius: Radius.circular(20),
                         keyboardType: TextInputType.multiline,

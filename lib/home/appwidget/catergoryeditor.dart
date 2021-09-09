@@ -19,8 +19,8 @@ class CategoryEditor extends StatefulWidget {
 
 class _CategoryEditorState extends State<CategoryEditor> {
   late TextEditingController _ctrl;
+  late Color _newColor;
 
-  Color _newColor = Colors.blue;
   @override
   void initState() {
     super.initState();
@@ -29,6 +29,10 @@ class _CategoryEditorState extends State<CategoryEditor> {
       _ctrl.selection =
           TextSelection(baseOffset: 0, extentOffset: widget.category!.length);
     }
+    _newColor = Color(widget.colorcode ?? 4280391411);
+    // if (widget.colorcode != null) {
+    //   _newColor = Color(widget.colorcode??000000000);
+    // }
   }
 
   @override
@@ -48,38 +52,50 @@ class _CategoryEditorState extends State<CategoryEditor> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton.icon(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: const Text('Select a color for the card'),
-                          content: MaterialColorPicker(
-                            onColorChange: (color) {
-                              print(color.value);
-                              setState(() {
-                                _newColor = color;
-                              });
-                            },
-                            selectedColor: Colors.red,
-                          ),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    color: _newColor,
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Select a color for the card'),
+                              content: MaterialColorPicker(
+                                onColorChange: (color) {
+                                  print(color.value);
+                                  setState(() {
+                                    _newColor = color;
+                                  });
                                 },
-                                child: Text('Done'))
-                          ],
-                        );
-                      });
-                },
-                icon: Icon(Icons.colorize, color: _newColor),
-                label: Text(
-                    (widget.category != null)
-                        ? 'Change the card color'
-                        : ' Chose a color for the card',
-                    style: TextStyle(color: _newColor))),
+                                selectedColor: Colors.red,
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Done'))
+                              ],
+                            );
+                          });
+                    },
+                    // icon: Icon(Icons.colorize, color: _newColor),
+                    child: Text(
+                        (widget.category != null)
+                            ? 'Change the card color'
+                            : ' Chose a color for the card',
+                        style: TextStyle(color: _newColor))),
+              ],
+            ),
             TextField(
               controller: _ctrl,
               autofocus: true,
@@ -208,9 +224,8 @@ class _CategoryEditorState extends State<CategoryEditor> {
                                       child: Text('cancell')),
                                   TextButton(
                                       onPressed: () async {
-                                        bool added =
-                                            await _manager.addNewCategory(
-                                                _ctrl.text, _newColor.value);
+                                        await _manager.addNewCategory(
+                                            _ctrl.text, _newColor.value);
                                         Navigator.of(context).pop();
                                         Navigator.of(context).pop();
                                       },

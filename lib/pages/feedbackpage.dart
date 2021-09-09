@@ -69,7 +69,12 @@ class _FeedBackPageState extends State<FeedBackPage> {
                                   : [
                                       TextButton(
                                           onPressed: () {},
-                                          child: Text('Cancel')),
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          )),
                                       TextButton(
                                           onPressed: () async {
                                             await _manager.addFeedBack(

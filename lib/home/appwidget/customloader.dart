@@ -8,7 +8,7 @@ class CustomLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SpinKitWave(
-        color: Colors.blue,
+        color: Colors.white,
         size: 50,
       ),
     );

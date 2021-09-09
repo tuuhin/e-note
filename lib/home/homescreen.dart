@@ -81,7 +81,23 @@ class HomeScreen extends StatelessWidget {
                     viewportFraction: 0.95,
                     scale: 0.8,
                   )
-                : Center(child: CircularProgressIndicator()),
+                : Center(
+                    child: Container(
+                      height: 80,
+                      child: Column(
+                        children: [
+                          CustomLoader(),
+                          Divider(height: 5),
+                          Text(
+                            'Loading',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
           ),
           SizedBox(height: 5),
           Expanded(
@@ -131,15 +147,34 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 Icon(
-                                  Icons.note_add,
+                                  Icons.format_list_bulleted,
                                   size: 50,
-                                  color: Colors.blue,
+                                  color: Colors.black45,
                                 ),
-                                Text('No notes created'),
+                                Text('No notes found ',
+                                    style: TextStyle(
+                                        color: Colors.black45,
+                                        fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ))
-                    : Center(child: CircularProgressIndicator()),
+                    : Center(
+                        child: Container(
+                          height: 80,
+                          child: Column(
+                            children: [
+                              CircularProgressIndicator(),
+                              Divider(height: 10),
+                              Text(
+                                'Loading',
+                                style: TextStyle(
+                                    color: Colors.lightBlue,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
               ),
             ),
           ))

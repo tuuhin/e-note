@@ -19,6 +19,7 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('About'),
         centerTitle: true,
+        brightness: Brightness.dark,
         elevation: 0,
       ),
       body: Container(
@@ -33,11 +34,10 @@ class AboutPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('About me'),
-              Divider(),
+              Divider(height: 5),
               Text(
-                  'Hellow welcome to eva this is a note app we provide u to attach notes with the categories'),
-              Divider(),
+                  'Welcome to E-Note\nThis is a note app where we hwlp our user to manager there important notes'),
+              Divider(height: 5),
               Container(
                 height: 300,
                 child: ListView.builder(

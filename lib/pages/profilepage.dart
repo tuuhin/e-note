@@ -38,7 +38,11 @@ class _ProfilePageState extends State<ProfilePage> {
             return Scaffold(
               backgroundColor: Theme.of(context).primaryColor,
               appBar: AppBar(
-                  title: Text('Profile'), centerTitle: true, elevation: 0),
+                title: Text('Profile'),
+                centerTitle: true,
+                elevation: 0,
+                brightness: Brightness.dark,
+              ),
               body: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -119,6 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               controller: _email,
                               decoration: InputDecoration(
                                   icon: Icon(Icons.email),
+                                  suffixIcon: Icon(Icons.edit_off),
                                   labelText: 'Email',
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide.none)),
