@@ -53,33 +53,60 @@ class _OpenScreenState extends State<OpenScreen>
                   HomeScreen(),
                   SettingPage(),
                 ]),
-            bottomNavigationBar: BottomAppBar(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      iconSize: 30,
-                      onPressed: () {
-                        _tabs.animateTo(0);
-                      },
-                      icon: Icon(Icons.home),
-                    ),
-                    IconButton(
-                      iconSize: 30,
-                      onPressed: () {
-                        _tabs.animateTo(1);
-                      },
-                      icon: Icon(Icons.menu),
-                    ),
-                  ],
-                ),
-              ),
-              notchMargin: 16.0,
-              shape: CircularNotchedRectangle(),
+            // bottomNavigationBar: BottomAppBar(
+            //   clipBehavior: Clip.hardEdge,
+            //   // elevation: 5,
+            //   child: Container(
+            //     height: 55,
+            //     color: Colors.grey[50],
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(
+            //         horizontal: 50,
+            //       ),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           IconButton(
+            //             iconSize: 30,
+            //             onPressed: () {
+            //               _tabs.animateTo(0);
+            //             },
+            //             icon: Icon(Icons.home),
+            //           ),
+            //           IconButton(
+            //             iconSize: 30,
+            //             onPressed: () {
+            //               _tabs.animateTo(1);
+            //             },
+            //             icon: Icon(Icons.menu),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            //   notchMargin: 16.0,
+            //   shape: CircularNotchedRectangle(),
+            // ),
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (t) {
+                // print(t);
+                if (t == 0) {
+                  _tabs.animateTo(0);
+                }
+                if (t == 1) {
+                  _tabs.animateTo(1);
+                }
+              },
+              type: BottomNavigationBarType.fixed,
+              unselectedItemColor: Colors.black45,
+              selectedItemColor: Colors.black45,
+              selectedFontSize: 12,
+              unselectedFontSize: 12,
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.menu), label: 'Settings')
+              ],
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
@@ -90,10 +117,7 @@ class _OpenScreenState extends State<OpenScreen>
                   '/note',
                 );
               },
-              child: Icon(
-                Icons.add,
-                size: 40,
-              ),
+              child: Icon(Icons.add, size: 40),
             ),
           ),
         ),

@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key? key}) : super(key: key);
+  AboutPage({Key? key}) : super(key: key);
+  final List _aboutMe = [
+    {
+      'title': 'Easy to Use',
+      'body':
+          'With simple functionality it\'s very simple to maintain your notes'
+    },
+    {'title': 'Helpful', 'body': 'It\'s easy to maintain'},
+    {'title': 'Security', 'body': 'Your notes are secure here'}
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +38,18 @@ class AboutPage extends StatelessWidget {
               Text(
                   'Hellow welcome to eva this is a note app we provide u to attach notes with the categories'),
               Divider(),
-              ListTile(
-                leading: Icon(Icons.donut_large),
-                title: Text('fa'),
-                subtitle: Text('hellow'),
-                // dense: true,
-              ),
+              Container(
+                height: 300,
+                child: ListView.builder(
+                    itemCount: _aboutMe.length,
+                    itemBuilder: (BuildContext context, int i) {
+                      return ListTile(
+                        leading: Icon(Icons.donut_large),
+                        title: Text(_aboutMe[i]['title']),
+                        subtitle: Text(_aboutMe[i]['body']),
+                      );
+                    }),
+              )
             ],
           ),
         ),

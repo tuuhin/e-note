@@ -107,6 +107,7 @@ class _SettingPageState extends State<SettingPage> {
                                 letterSpacing: 1.1)),
                         SizedBox(height: 2),
                         Text('Email: ' + email,
+                            textDirection: TextDirection.rtl,
                             // overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white70,
@@ -164,7 +165,9 @@ class _SettingPageState extends State<SettingPage> {
                         child: ListView.builder(
                             itemCount: _settings.length,
                             itemBuilder: (BuildContext context, int i) {
-                              return _settings[i];
+                              return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: _settings[i]);
                             }),
                       )
                     ],

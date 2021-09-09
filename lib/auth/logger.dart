@@ -29,6 +29,7 @@ class _LoggerState extends State<Logger> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           Home(
             changeLogTab: () {
