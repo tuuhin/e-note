@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather/home/appwidget/appwidget.dart';
 
 class PickedLabel extends StatefulWidget {
-  String text;
-  Color textColor;
-  Color backgroundColor;
+  final String text;
+  final Color textColor;
+  final Color backgroundColor;
   PickedLabel(
     this.text,
     this.textColor,

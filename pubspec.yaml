@@ -44,6 +44,12 @@ dev_dependencies:
   image_picker: ^0.8.4
   firebase_storage: ^10.0.3
   path_provider: ^2.0.3
+  flutter_launcher_icons: "^0.9.2"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/ico.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LabelView extends StatelessWidget {
-  String label;
-  Color textColor;
-  Color backgroundColor;
+  final String label;
+  final Color textColor;
+  final Color backgroundColor;
   LabelView(
       {Key? key,
       required this.label,

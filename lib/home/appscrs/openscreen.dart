@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather/auth/dbmanager.dart';
-import 'package:weather/home/homescreen.dart';
-import 'package:weather/home/settingspage.dart';
+import 'package:weather/home/appscrs/homescreen.dart';
+import 'package:weather/home/appscrs/settingspage.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/model/loggeruser.dart';
 import 'package:weather/model/model.dart';
