@@ -8,6 +8,7 @@ class Home extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double mediaWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.greenAccent,
       body: Container(
@@ -48,7 +49,7 @@ class Home extends StatelessWidget {
                     onPressed: changeLogTab,
                     child: Text('Log In'),
                     style: ElevatedButton.styleFrom(
-                        fixedSize: Size(300, 50),
+                        fixedSize: Size(mediaWidth - 60, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
@@ -59,7 +60,7 @@ class Home extends StatelessWidget {
                     onPressed: changeSignTab,
                     child: Text('Sign Up'),
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(300, 50),
+                      fixedSize: Size(mediaWidth - 60, 50),
                       primary: Color(0x00ffffff),
                       elevation: 0,
                       side: BorderSide(width: 2, color: Colors.white),

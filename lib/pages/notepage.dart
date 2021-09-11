@@ -261,13 +261,11 @@ class _NotePageState extends State<NotePage> {
                           isExpanded: true,
                           hint: Text('categoryy'),
                           style: TextStyle(
-                            // color: Colors.white,
                             fontSize: 20,
                           ),
                           underline: Container(),
                           icon: Icon(
                             Icons.expand_more,
-                            // color: Colors.white,
                             size: 25,
                           ),
                           iconEnabledColor: Colors.white,

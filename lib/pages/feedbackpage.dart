@@ -68,7 +68,11 @@ class _FeedBackPageState extends State<FeedBackPage> {
                                     ]
                                   : [
                                       TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            print(MediaQuery.of(context)
+                                                .size
+                                                .height);
+                                          },
                                           child: Text(
                                             'Cancel',
                                             style: TextStyle(
@@ -89,14 +93,9 @@ class _FeedBackPageState extends State<FeedBackPage> {
                           });
                     },
                     icon: Icon(Icons.add, size: 30)),
-                SizedBox(
-                  width: 20,
-                )
               ],
             ),
             body: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -104,15 +103,13 @@ class _FeedBackPageState extends State<FeedBackPage> {
                       topRight: Radius.circular(20))),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   children: [
                     // Text('Feedback'),
                     Divider(),
-                    Text('''
-    We are very thankful to you to use our app.
-    we are too sorry if we are not able to meed your needs.
-    We will be greatful if you fill this feedack form regarding your problems'''),
+                    Text(
+                        'We are very thankful to you to use our app.\nwe are too sorry if we are not able to meed your needs.\nWe will be greatful if you fill this feedack form regarding your problems'),
                     Divider(),
                     // SizedBox(height: 4),
                     TextField(
@@ -124,7 +121,7 @@ class _FeedBackPageState extends State<FeedBackPage> {
                           border: UnderlineInputBorder(
                               borderSide: BorderSide.none)),
                     ),
-                    Divider(),
+                    Divider(height: 2),
                     TextField(
                       controller: _email,
                       readOnly: true,

@@ -17,6 +17,8 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double mediaHeight = MediaQuery.of(context).size.height;
+    double mediaWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Container(
@@ -27,17 +29,15 @@ class CategoryCard extends StatelessWidget {
             color: Color(colorcode ?? 0xffa49b45),
             // color: Color(colorcode ?? 0xffa49b45),
             borderRadius: BorderRadius.circular(20)),
-        height: 150,
+        height: mediaHeight * .2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 40,
-            ),
+            SizedBox(height: mediaHeight * .05),
             Text(
               '$category'.toUpperCase(),
               style: TextStyle(
-                  fontSize: 30,
+                  fontSize: mediaWidth * .08,
                   fontWeight: FontWeight.w800,
                   color: _color,
                   letterSpacing: 1.8),
@@ -46,7 +46,7 @@ class CategoryCard extends StatelessWidget {
               height: 10,
             ),
             Container(
-              width: 100,
+              width: mediaWidth * .27,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Colors.white24),

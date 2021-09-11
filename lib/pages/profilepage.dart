@@ -31,6 +31,74 @@ class _ProfilePageState extends State<ProfilePage> {
     return StreamBuilder(
         stream: _manager.getCurrentUserData(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          double mediaHeight = MediaQuery.of(context).size.height;
+          double mediaWidth = MediaQuery.of(context).size.width;
+          List<Widget> _profiledataHolders = [
+            SizedBox(height: mediaHeight * 0.06),
+            TextField(
+              readOnly: true,
+              controller: _name,
+              onTap: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: UpdateSheet(
+                          title: 'Enter your name',
+                          mode: 'name',
+                          previousData: snapshot.data.data()['name'],
+                        ),
+                      );
+                    });
+              },
+              decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.edit),
+                  icon: Icon(Icons.person),
+                  labelText: 'Name',
+                  border: UnderlineInputBorder(borderSide: BorderSide.none)),
+            ),
+            Divider(height: 30),
+            TextField(
+              readOnly: true,
+              controller: _about,
+              maxLines: 3,
+              onTap: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return Padding(
+                        padding: MediaQuery.of(context).viewInsets,
+                        child: UpdateSheet(
+                          title: 'Add About.',
+                          mode: 'about',
+                          previousData: snapshot.data.data()['about'],
+                        ),
+                      );
+                    });
+              },
+              decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.edit),
+                  icon: Icon(Icons.info),
+                  labelText: 'About',
+                  focusedBorder: null,
+                  border: UnderlineInputBorder(borderSide: BorderSide.none)),
+            ),
+            Divider(height: 30),
+            TextField(
+              readOnly: true,
+              controller: _email,
+              decoration: InputDecoration(
+                  icon: Icon(Icons.email),
+                  // suffixIcon: Icon(Icons.edit_off),
+                  labelText: 'Email',
+                  border: UnderlineInputBorder(borderSide: BorderSide.none)),
+            )
+          ];
           if (snapshot.hasData) {
             _name.text = snapshot.data.data()['name'];
             _about.text = snapshot.data.data()['about'];
@@ -44,97 +112,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 brightness: Brightness.dark,
               ),
               body: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 50),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 10),
-                        child: Column(
-                          children: [
-                            TextField(
-                              readOnly: true,
-                              controller: _name,
-                              onTap: () {
-                                showModalBottomSheet(
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (BuildContext context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: UpdateSheet(
-                                          title: 'Enter your name',
-                                          mode: 'name',
-                                          previousData:
-                                              snapshot.data.data()['name'],
-                                        ),
-                                      );
-                                    });
-                              },
-                              decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.edit),
-                                  icon: Icon(Icons.person),
-                                  labelText: 'Name',
-                                  border: UnderlineInputBorder(
-                                      borderSide: BorderSide.none)),
-                            ),
-                            Divider(height: 30),
-                            TextField(
-                              readOnly: true,
-                              controller: _about,
-                              maxLines: 3,
-                              onTap: () {
-                                showModalBottomSheet(
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (BuildContext context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.of(context).viewInsets,
-                                        child: UpdateSheet(
-                                          title: 'Add About.',
-                                          mode: 'about',
-                                          previousData:
-                                              snapshot.data.data()['about'],
-                                        ),
-                                      );
-                                    });
-                              },
-                              decoration: InputDecoration(
-                                  suffixIcon: Icon(Icons.edit),
-                                  icon: Icon(Icons.info),
-                                  labelText: 'About',
-                                  focusedBorder: null,
-                                  border: UnderlineInputBorder(
-                                      borderSide: BorderSide.none)),
-                            ),
-                            Divider(height: 30),
-                            TextField(
-                              readOnly: true,
-                              controller: _email,
-                              decoration: InputDecoration(
-                                  icon: Icon(Icons.email),
-                                  suffixIcon: Icon(Icons.edit_off),
-                                  labelText: 'Email',
-                                  border: UnderlineInputBorder(
-                                      borderSide: BorderSide.none)),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+                  height: mediaHeight,
+                  width: mediaWidth,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))),
+                  child: ListView.builder(
+                      itemCount: _profiledataHolders.length,
+                      itemBuilder: (BuildContext context, int i) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: _profiledataHolders[i],
+                        );
+                      })),
             );
           } else {
             return Center(child: CircularProgressIndicator());

@@ -30,7 +30,6 @@ class _SettingPageState extends State<SettingPage> {
       email = _value['email'];
     }
     _settings = [
-      SizedBox(height: 10),
       Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
       SizedBox(height: 10),
       TextButton.icon(
@@ -70,7 +69,7 @@ class _SettingPageState extends State<SettingPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(height: 80),
+            SizedBox(height: MediaQuery.of(context).size.height * .085),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -91,7 +90,7 @@ class _SettingPageState extends State<SettingPage> {
                 ),
                 Container(
                   // color: Colors.purple,
-                  width: 280,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                     child: Column(
@@ -99,9 +98,10 @@ class _SettingPageState extends State<SettingPage> {
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(name,
-                            overflow: TextOverflow.ellipsis,
+                            // overflow: TextOverflow.ellipsis,
+                            textDirection: TextDirection.rtl,
                             style: TextStyle(
-                                color: SettingPage._white,
+                                color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 1.1)),
@@ -156,11 +156,12 @@ class _SettingPageState extends State<SettingPage> {
                                   ],
                                 ),
                               ),
-                            )
+                            ),
+                            SizedBox(height: 20),
                           ],
                         ),
                       ),
-                      Divider(height: 30),
+                      Divider(height: 10),
                       Expanded(
                         child: ListView.builder(
                             itemCount: _settings.length,

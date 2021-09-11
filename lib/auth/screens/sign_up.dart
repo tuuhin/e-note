@@ -68,6 +68,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    double mediaHeight = MediaQuery.of(context).size.height;
+    double mediaWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Color(0xff31255a),
         body: loading
@@ -82,19 +84,19 @@ class _SignUpState extends State<SignUp> {
                     'Create \nAccount',
                     style: TextStyle(
                         color: _white,
-                        fontSize: 35,
+                        fontSize: mediaWidth * 0.09,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.2),
                   ),
-                  bottom: 380,
-                  left: 30,
+                  bottom: mediaHeight * 0.5,
+                  left: mediaWidth * .08,
                 ),
                 Positioned(
                   bottom: 10,
-                  left: 30,
+                  left: mediaWidth * .08,
                   child: Container(
-                    height: 370,
-                    width: 300,
+                    height: mediaHeight * 0.5,
+                    width: mediaWidth * 0.83,
                     child: Form(
                       key: _formkey,
                       child: Column(
@@ -165,7 +167,7 @@ class _SignUpState extends State<SignUp> {
                             style: TextStyle(color: _white),
                             decoration: InputDecoration(
                               suffix: IconButton(
-                                  iconSize: 20,
+                                  iconSize: mediaWidth * .05,
                                   onPressed: () {
                                     setState(() {
                                       hidepWord = !hidepWord;
@@ -190,7 +192,8 @@ class _SignUpState extends State<SignUp> {
                           ElevatedButton(
                             child: Text('Sign In'),
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(300, 50),
+                              fixedSize:
+                                  Size(mediaWidth * .83, mediaHeight * 0.06),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -223,7 +226,8 @@ class _SignUpState extends State<SignUp> {
                           ElevatedButton(
                             child: Text('Log In'),
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(300, 50),
+                              fixedSize:
+                                  Size(mediaWidth * .83, mediaHeight * 0.06),
                               primary: Color(0x00ffffff),
                               elevation: 0,
                               side: BorderSide(width: 2, color: _white),

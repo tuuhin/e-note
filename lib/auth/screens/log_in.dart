@@ -64,6 +64,8 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    double mediaHeight = MediaQuery.of(context).size.height;
+    double mediaWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: Color(0xff31255a),
         body: loading
@@ -81,19 +83,19 @@ class _LogInState extends State<LogIn> {
                     'Welcome \nBack',
                     style: TextStyle(
                         color: _white,
-                        fontSize: 35,
+                        fontSize: mediaWidth * 0.1,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.2),
                   ),
-                  bottom: 380,
+                  bottom: mediaHeight * 0.5,
                   left: 30,
                 ),
                 Positioned(
-                  bottom: 10,
+                  bottom: 0,
                   left: 30,
                   child: Container(
-                    height: 370,
-                    width: 300,
+                    height: mediaHeight * 0.5,
+                    width: mediaWidth * 0.83,
                     child: Form(
                       key: _formkey,
                       child: Column(
@@ -159,11 +161,11 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 40),
+                          SizedBox(height: mediaHeight * 0.05),
                           ElevatedButton(
                             child: Text('Log in'),
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(300, 50),
+                              fixedSize: Size(mediaWidth - 60, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -193,9 +195,9 @@ class _LogInState extends State<LogIn> {
                           ),
                           SizedBox(height: 5),
                           ElevatedButton(
-                            child: Text('Sign In'),
+                            child: Text('Sign Up'),
                             style: ElevatedButton.styleFrom(
-                              fixedSize: Size(300, 50),
+                              fixedSize: Size(mediaWidth - 60, 50),
                               primary: Color(0x00ffffff),
                               elevation: 0,
                               side: BorderSide(width: 2, color: _white),

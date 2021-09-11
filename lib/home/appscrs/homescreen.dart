@@ -33,14 +33,17 @@ class HomeScreen extends StatelessWidget {
       });
     }
 
+    double mediaHeight = MediaQuery.of(context).size.height;
+    double mediaWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.lightBlue,
       body: Column(
         children: [
-          SizedBox(height: 50),
+          SizedBox(height: mediaHeight * 0.064),
           Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
+            width: mediaWidth,
+            height: mediaHeight * 0.07,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -65,7 +68,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            height: 200,
+            height: mediaHeight * 0.25,
             child: _card.length > 0
                 ? Swiper(
                     itemBuilder: (BuildContext context, int index) {
@@ -77,8 +80,8 @@ class HomeScreen extends StatelessWidget {
                     pagination: SwiperPagination(
                         builder: SwiperPagination.dots,
                         margin: EdgeInsets.zero),
-                    viewportFraction: 0.95,
-                    scale: 0.8,
+                    viewportFraction: 0.9,
+                    scale: 0.75,
                   )
                 : Center(
                     child: Container(
@@ -86,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomLoader(),
-                          Divider(height: 5),
+                          // Divider(height: 5),
                           Text(
                             'Loading',
                             style: TextStyle(
@@ -101,7 +104,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 5),
           Expanded(
               child: Container(
-            width: MediaQuery.of(context).size.width,
+            width: mediaWidth,
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.only(

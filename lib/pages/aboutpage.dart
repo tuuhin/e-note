@@ -36,13 +36,14 @@ class AboutPage extends StatelessWidget {
             children: [
               Divider(height: 5),
               Text(
-                  'Welcome to E-Note\nThis is a note app where we hwlp our user to manager there important notes'),
+                  'Welcome to E-Note\nThis is a note app where we help our user to manager there important notes'),
               Divider(height: 5),
-              Container(
-                height: 300,
+              Expanded(
                 child: ListView.builder(
                     itemCount: _aboutMe.length,
                     itemBuilder: (BuildContext context, int i) {
+                      print(
+                          '${MediaQuery.of(context).size.height},${MediaQuery.of(context).size.width},');
                       return ListTile(
                         leading: Icon(Icons.donut_large),
                         title: Text(_aboutMe[i]['title']),
