@@ -45,11 +45,19 @@ dev_dependencies:
   firebase_storage: ^10.0.3
   path_provider: ^2.0.3
   flutter_launcher_icons: "^0.9.2"
+  flutter_native_splash: ^1.2.3
 
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/ico.png"
+
+flutter_native_splash:
+  color: "#2f9ff5"
+  image: "assets/ico.png"
+  android: true
+  ios: true
+  
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
