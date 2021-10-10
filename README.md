@@ -1,4 +1,4 @@
-# weather
+# E-note
 
 A new Flutter project.
 
