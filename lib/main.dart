@@ -27,9 +27,7 @@ class MyApp extends StatelessWidget {
       value: _auth.currentUser,
       initialData: CurrentUser(uid: null),
       child: MaterialApp(
-        // debugShowCheckedModeBanner: false,
-
-        title: 'Flutter Demo',
+        title: 'E-Note',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.blue),
         routes: {
